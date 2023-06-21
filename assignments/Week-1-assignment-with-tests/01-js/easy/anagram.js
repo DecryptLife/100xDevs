@@ -31,4 +31,5 @@ function isAnagram(str1, str2) {
   return true;
 }
 
+console.log(isAnagram("Benson", "Thomas"));
 module.exports = isAnagram;
