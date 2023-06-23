@@ -3,7 +3,8 @@ const app = express();
 const port = 3000;
 
 function handleFirstRequest(req, res) {
-  var calsum = calcSum(100);
+  var counter = req.query.counter;
+  var calsum = calcSum(counter);
   var ans = "The sum is " + calsum;
   res.send(ans);
 }
