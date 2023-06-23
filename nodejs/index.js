@@ -15,6 +15,17 @@ function calcSum(counter) {
   return sum;
 }
 
+function createUser(req, res) {
+  res.send("User created");
+}
+
+function updateName(req, res) {
+  res.send("Name updated");
+}
+
+function deleteUser(req, res) {
+  res.send("User deleted");
+}
 // app.get("/handleSum", calcSum);
 
 function started() {
@@ -22,6 +33,9 @@ function started() {
 }
 
 app.get("/handleSum", handleFirstRequest);
+app.post("/createUser", createUser);
+app.put("/updateName", updateName);
+app.delete("/deleteUser", deleteUser);
 app.listen(port, started);
 
 // function callbackFn(err, data) {
