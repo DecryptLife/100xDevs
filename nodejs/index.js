@@ -1,4 +1,5 @@
 const express = require("express");
+var bodyParser = require("body-parser");
 const app = express();
 const port = 3000;
 
@@ -9,6 +10,18 @@ function handleFirstRequest(req, res) {
   res.send(ans);
 }
 
+function middleware(req, res, next) {
+  console.log("From inside middleware: " + req.headers.counter);
+  res.send("Error from inside middleware");
+  next();
+}
+
+// to register a middleware - every request that comes shoud go through this function
+// app.use(middleware);
+
+// middleware - extracts the body before going to the routes else the body becomes undefined
+app.use(bodyParser.json());
+
 function calcSum(counter) {
   var sum = 0;
   for (var i = 0; i <= counter; i++) sum += i;
@@ -17,7 +30,10 @@ function calcSum(counter) {
 }
 
 function createUser(req, res) {
-  res.send("User created");
+  var name = req.body.name;
+  var age = req.body.age;
+
+  res.send("User created: " + name + " is " + age + " years old");
 }
 
 function updateName(req, res) {
