@@ -11,7 +11,8 @@ function handleFirstRequest(req, res) {
 
 function calcSum(counter) {
   var sum = 0;
-  for (var i = 0; i < counter; i++) sum += i;
+  for (var i = 0; i <= counter; i++) sum += i;
+
   return sum;
 }
 
@@ -26,6 +27,14 @@ function updateName(req, res) {
 function deleteUser(req, res) {
   res.send("User deleted");
 }
+
+function handleSumPost(req, res) {
+  console.log(req.headers);
+  var val = req.headers.counter;
+  var sum = calcSum(val);
+  var ans = "The sum is " + sum;
+  res.send(ans);
+}
 // app.get("/handleSum", calcSum);
 
 function started() {
@@ -33,6 +42,7 @@ function started() {
 }
 
 app.get("/handleSum", handleFirstRequest);
+app.post("/handleSum", handleSumPost);
 app.post("/createUser", createUser);
 app.put("/updateName", updateName);
 app.delete("/deleteUser", deleteUser);
