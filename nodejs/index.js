@@ -3,13 +3,6 @@ var bodyParser = require("body-parser");
 const app = express();
 const port = 3000;
 
-function handleFirstRequest(req, res) {
-  var counter = req.query.counter;
-  var calsum = calcSum(counter);
-  var ans = "The sum is " + calsum;
-  res.send(ans);
-}
-
 function middleware(req, res, next) {
   console.log("From inside middleware: " + req.headers.counter);
   res.send("Error from inside middleware");
@@ -29,6 +22,34 @@ function calcSum(counter) {
   return sum;
 }
 
+function calcMul(counter) {
+  var mul = 1;
+  for (var i = 1; i <= counter; i++) {
+    mul = mul * i;
+  }
+
+  return mul;
+}
+
+function handleFirstRequest(req, res) {
+  // console.log(req.headers);
+  var val = req.body.counter;
+
+  var valSum = calcSum(val);
+  var valMul = calcMul(val);
+
+  var answer = { sum: valSum, mul: valMul };
+  // if (val < 100000) {
+  //   var sum = calcSum(val);
+  //   var ans = "The sum is " + sum;
+  //   res.send(ans);
+  // } else {
+  //   res.status(411).send("You have send a very huge number");
+  // }
+
+  res.status(200).send(answer);
+}
+
 function createUser(req, res) {
   var name = req.body.name;
   var age = req.body.age;
@@ -45,18 +66,24 @@ function deleteUser(req, res) {
 }
 
 function handleSumPost(req, res) {
-  console.log(req.headers);
-  var val = req.headers.counter;
-  var sum = calcSum(val);
-  var ans = "The sum is " + sum;
-  res.send(ans);
+  res.send(`<head>
+  <title>Hello from page</title>
+</head>
+<body>
+  <b>hi there</b>
+</body>
+`);
 }
 // app.get("/handleSum", calcSum);
 
 function started() {
   console.log(`Example app listening on port ${port}`);
 }
+function givePage(req, res) {
+  res.send();
+}
 
+app.get("/", givePage);
 app.get("/handleSum", handleFirstRequest);
 app.post("/handleSum", handleSumPost);
 app.post("/createUser", createUser);
@@ -69,4 +96,4 @@ app.listen(port, started);
 // }
 // fs.readFile("./a.txt", "utf-8", callbackFn);
 
-calcSum(100);
+// calcSum(100);
