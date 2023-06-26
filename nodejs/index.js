@@ -66,6 +66,14 @@ function deleteUser(req, res) {
 }
 
 function handleSumPost(req, res) {
+  res.send();
+}
+// app.get("/handleSum", calcSum);
+
+function started() {
+  console.log(`Example app listening on port ${port}`);
+}
+function givePage(req, res) {
   res.send(`<head>
   <title>Hello from page</title>
 </head>
@@ -74,16 +82,18 @@ function handleSumPost(req, res) {
 </body>
 `);
 }
-// app.get("/handleSum", calcSum);
 
-function started() {
-  console.log(`Example app listening on port ${port}`);
-}
-function givePage(req, res) {
-  res.send();
-}
+function handSumRequest(req, res) {
+  var counter = req.query.counter;
+  var calSum = calcSum(counter);
+  var ansObj = {
+    sum: calSum,
+  };
 
+  res.send(ansObj);
+}
 app.get("/", givePage);
+app.get("/handSum", handSumRequest);
 app.get("/handleSum", handleFirstRequest);
 app.post("/handleSum", handleSumPost);
 app.post("/createUser", createUser);
