@@ -1,10 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
+const cors = require("cors");
 const path = require("path");
 const app = express();
 
 app.use(bodyParser.json());
+app.use(cors());
 function findIndex(arr, id) {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].id === id) return i;
@@ -96,9 +98,9 @@ app.delete("/todos/:id", (req, res) => {
   });
 });
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "index.html"));
+// });
 
 // for all other routes, return 404
 app.use((req, res, next) => {
