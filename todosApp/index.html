@@ -3,18 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Todos App</title>
   </head>
+  <script>
+    function onPress() {
+      function parsedResponse(data) {
+        console.log(data);
+      }
+      function callback(res) {
+        res.json().then(parsedResponse);
+      }
+      fetch("http://localhost:3000/todos", {
+        method: "GET",
+      }).then(callback);
+    }
+  </script>
   <body>
-    <form>
-      <div>
-        Enter the title:
-        <input type="text" />
-      </div>
-      <div>
-        Enter the description:
-        <input type="text" />
-      </div>
-    </form>
+    Enter the title:
+    <input type="text" />
+    <br /><br />
+    Enter the description:
+    <input type="text" />
+    <br /><br />
+    <button onclick="onPress()">Send Todo</button>
   </body>
 </html>
