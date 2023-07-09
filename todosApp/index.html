@@ -7,24 +7,67 @@
   </head>
   <script>
     function onPress() {
+      var title = document.getElementById("title").value;
+      var description = document.getElementById("description").value;
+
       function parsedResponse(data) {
         console.log(data);
       }
       function callback(res) {
         res.json().then(parsedResponse);
       }
+      //   fetch("http://localhost:3000/todos", {
+      //     method: "GET",
+      //   }).then(callback);
+
+      fetch("http://localhost:3000/todos", {
+        method: "POST",
+        body: JSON.stringify({
+          title: title,
+          description: description,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then(callback);
+    }
+
+    function getAll() {
+      function parsedData(data) {
+        const tasks = document.getElementById("tasks");
+
+        data.forEach((element) => {
+          const listItem = document.createElement("li");
+          listItem.textContent = `${element.title} - ${element.description}`;
+
+          const button = document.createElement("button");
+          button.textContent = "Completed";
+
+          listItem.append(button);
+          tasks.appendChild(listItem);
+        });
+      }
+      function callback(res) {
+        res.json().then(parsedData);
+      }
       fetch("http://localhost:3000/todos", {
         method: "GET",
       }).then(callback);
     }
+
+    getAll();
   </script>
   <body>
+    <h1>Todo App</h1>
     Enter the title:
-    <input type="text" />
+    <input type="text" id="title" />
     <br /><br />
     Enter the description:
-    <input type="text" />
+    <input type="text" id="description" />
     <br /><br />
     <button onclick="onPress()">Send Todo</button>
+
+    <h2>Todos</h2>
+    <ul id="tasks"></ul>
   </body>
 </html>
