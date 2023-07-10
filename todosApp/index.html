@@ -38,10 +38,13 @@
 
         data.forEach((element) => {
           const listItem = document.createElement("li");
+          listItem.id = element.id;
           listItem.textContent = `${element.title} - ${element.description}`;
 
           const button = document.createElement("button");
           button.textContent = "Completed";
+          button.id = listItem.id;
+          button.setAttribute("onclick", "deleteTask(id)");
 
           listItem.append(button);
           tasks.appendChild(listItem);
@@ -53,6 +56,15 @@
       fetch("http://localhost:3000/todos", {
         method: "GET",
       }).then(callback);
+    }
+
+    function deleteTask(id) {
+      function deleteDone() {
+        console.log("delete done");
+      }
+      fetch(`http://localhost:3000/todos/${id}`, {
+        method: "DELETE",
+      }).then(deleteDone);
     }
 
     getAll();
