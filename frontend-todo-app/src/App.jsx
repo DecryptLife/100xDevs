@@ -40,8 +40,13 @@ function App() {
         <br></br>
         {todos.description}
       </h1>
+      <PersonName></PersonName>
     </>
   );
+}
+
+function PersonName() {
+  return <div>Benson Thomas</div>;
 }
 
 export default App;
