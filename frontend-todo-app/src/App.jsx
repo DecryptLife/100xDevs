@@ -14,41 +14,37 @@ import "./App.css";
 //   },
 // ];
 
-var todo = {
-  title: "Go to Gym",
-  description: "Go to the gym after Owlspark",
-  id: 1,
-};
-
 function App() {
-  const [todos, setTodos] = useState({
-    title: "Go to Gym",
-    description: "Go to gym after Owlspark program",
-  });
-
-  setInterval(() => {
-    setTodos({
+  const [todoForToday, setTodoForToday] = useState([
+    {
+      title: "Go to Gym",
+      description: "Go to gym after Owlspark program",
+      id: 1,
+    },
+    {
       title: "Go to church",
       description: "Go to chruch this Sunday",
       id: 2,
-    });
-  }, 3000);
+    },
+  ]);
+
   return (
-    <>
-      <h1>
-        {todos.title}
-        <br></br>
-        {todos.description}
-      </h1>
-      <PersonName firstName={"Benson"} lastName={"Thomas"}></PersonName>
-    </>
+    <div>
+      {todoForToday.map((todo) => {
+        return <Todo title={todo.title} description={todo.description}></Todo>;
+      })}
+    </div>
   );
 }
 
-function PersonName(props) {
+function Todo(props) {
   return (
     <div>
-      {props.firstName} {props.lastName}
+      {props.title}
+      <br />
+      {props.description}
+      <br />
+      <br />
     </div>
   );
 }
