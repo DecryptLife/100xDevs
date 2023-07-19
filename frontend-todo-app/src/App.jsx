@@ -40,13 +40,17 @@ function App() {
         <br></br>
         {todos.description}
       </h1>
-      <PersonName></PersonName>
+      <PersonName firstName={"Benson"} lastName={"Thomas"}></PersonName>
     </>
   );
 }
 
-function PersonName() {
-  return <div>Benson Thomas</div>;
+function PersonName(props) {
+  return (
+    <div>
+      {props.firstName} {props.lastName}
+    </div>
+  );
 }
 
 export default App;
