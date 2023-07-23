@@ -1,4 +1,5 @@
 import SignUp from "./SignUp.jsx";
+import Appbar from "./Appbar.jsx";
 import "./App.css";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
         backgroundColor: "#eeeeee",
       }}
     >
+      <Appbar></Appbar>
       <SignUp></SignUp>
     </div>
   );

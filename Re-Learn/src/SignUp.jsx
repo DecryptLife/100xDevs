@@ -35,9 +35,11 @@ function SignUp() {
           ></TextField>
           <br />
           <br />
-          <Button size="large" variant="contained">
-            Sign up
-          </Button>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button size="large" variant="contained">
+              Sign up
+            </Button>
+          </div>
         </Card>
       </div>
     </div>
