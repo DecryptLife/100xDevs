@@ -1,18 +1,24 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignUp from "./SignUp.jsx";
 import Appbar from "./Appbar.jsx";
-import "./App.css";
+import Signin from "./Signin.jsx";
 
 function App() {
   return (
     <div
       style={{
-        width: "100vw",
-        height: "100vh",
         backgroundColor: "#eeeeee",
+        height: "100vh",
+        width: "100vw",
       }}
     >
       <Appbar></Appbar>
-      <SignUp></SignUp>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Signin />}></Route>
+          <Route path="/signup" element={<SignUp />}></Route>
+        </Routes>
+      </Router>
     </div>
   );
 }
