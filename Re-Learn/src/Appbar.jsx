@@ -1,6 +1,8 @@
+// import { useHistory } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
 function Appbar() {
+  // const history = useHistory();
   return (
     <div
       style={{
@@ -17,6 +19,7 @@ function Appbar() {
           <Button
             variant="contained"
             onClick={() => {
+              // history.push("/singup");
               window.location = "/signup";
             }}
           >
@@ -27,6 +30,7 @@ function Appbar() {
           <Button
             variant="contained"
             onClick={() => {
+              // history.push("/login");
               window.location = "/login";
             }}
           >
