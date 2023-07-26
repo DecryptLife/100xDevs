@@ -7,7 +7,7 @@ import { useState } from "react";
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const path = "http://localhost:3067/admin";
+  const path = "http://localhost:3067";
   return (
     <div>
       <div
@@ -44,7 +44,7 @@ function SignUp() {
               size="large"
               variant="contained"
               onClick={() => {
-                fetch(`${path}/signup`, {
+                fetch(`${path}/admin/signup`, {
                   method: "POST",
                   body: JSON.stringify({
                     username: email,
