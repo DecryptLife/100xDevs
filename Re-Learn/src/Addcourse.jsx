@@ -6,6 +6,7 @@ import { useState } from "react";
 function Addcourse() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
 
   const path = "http://localhost:3067";
 
@@ -33,6 +34,13 @@ function Addcourse() {
             onChange={(e) => setDescription(e.target.value)}
           ></TextField>
 
+          <TextField
+            fullWidth={true}
+            label="Image"
+            variant="outlined"
+            onChange={(e) => setDescription(e.target.value)}
+          ></TextField>
+
           <Button
             size="large"
             variant="contained"
@@ -42,7 +50,7 @@ function Addcourse() {
                 body: JSON.stringify({
                   title: title,
                   description: description,
-                  imageLink: "",
+                  imageLink: image,
                   published: true,
                 }),
                 headers: {

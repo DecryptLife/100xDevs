@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
-import { CardContent, CardMedia, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import { CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 
 function Courses() {
   const path = "http://localhost:3067";
@@ -34,7 +35,10 @@ function Course(props) {
   return (
     <div style={{ margin: 10 }}>
       <Card style={{ maxWidth: 300 }}>
-        <CardMedia style={{ height: 150 }}></CardMedia>
+        <CardMedia
+          style={{ height: 150 }}
+          image={props.course.imageLink}
+        ></CardMedia>
         <CardContent>
           <Typography variant="h5" textAlign={"center"}>
             {props.course.title}
@@ -43,6 +47,11 @@ function Course(props) {
             {props.course.description}
           </Typography>
         </CardContent>
+
+        <CardActions style={{ display: "flex", justifyContent: "center" }}>
+          <Button size="small">Share</Button>
+          <Button size="small">Learn More</Button>
+        </CardActions>
       </Card>
     </div>
   );
