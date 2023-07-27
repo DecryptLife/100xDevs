@@ -38,7 +38,7 @@ function Addcourse() {
             fullWidth={true}
             label="Image"
             variant="outlined"
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => setImage(e.target.value)}
           ></TextField>
 
           <Button
