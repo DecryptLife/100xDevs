@@ -3,6 +3,7 @@ import SignUp from "./SignUp.jsx";
 import Appbar from "./Appbar.jsx";
 import Signin from "./Signin.jsx";
 import Addcourse from "./Addcourse.jsx";
+import Courses from "./Courses.jsx";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/addcourse" element={<Addcourse />}></Route>
+          <Route path="/courses" element={<Courses />}></Route>
           <Route path="/login" element={<Signin />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
         </Routes>

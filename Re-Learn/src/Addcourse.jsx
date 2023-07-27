@@ -49,11 +49,11 @@ function Addcourse() {
                   "Content-type": "application/json",
                   Authorization: "Bearer " + localStorage.getItem("token"),
                 },
-              }).then((res) => {
-                res.json().then((data) => {
-                  localStorage.setItem("token", data.token);
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  alert("Course created successfully");
                 });
-              });
             }}
           >
             Add Course
