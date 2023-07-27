@@ -53,11 +53,12 @@ function SignUp() {
                   headers: {
                     "Content-type": "application/json",
                   },
-                }).then((res) => {
-                  res.json().then((data) => {
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
                     localStorage.setItem("token", data.token);
+                    window.location = "/";
                   });
-                });
               }}
             >
               Sign up

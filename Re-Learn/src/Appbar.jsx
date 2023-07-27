@@ -1,11 +1,14 @@
 // import { useHistory } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 function Appbar() {
   // const history = useHistory();
 
   const path = "http://localhost:3067";
+
+  const [userEmail, setUserEmail] = useState(null);
+
   useEffect(() => {
     fetch(`${path}/admin/me`, {
       method: "GET",
@@ -15,8 +18,39 @@ function Appbar() {
       },
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => setUserEmail(data.username));
   }, []);
+
+  if (userEmail) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: 10,
+        }}
+      >
+        <div>
+          <Typography variant="h6">Re-Learn</Typography>
+        </div>
+        <div style={{ display: "flex" }}>
+          <div>{userEmail}</div>
+          <div style={{ marginRight: 10 }}>
+            <Button
+              variant="contained"
+              onClick={() => {
+                // history.push("/singup");
+                localStorage.setItem("token", null);
+                window.location = "/signup";
+              }}
+            >
+              Logout
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
