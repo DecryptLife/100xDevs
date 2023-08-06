@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import { CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 
-function Courses() {
+function Course() {
   const path = "http://localhost:3067";
+
+  let { courseId } = useParams();
 
   const [courses, setCourses] = useState([]);
 
@@ -21,35 +24,29 @@ function Courses() {
       .then((data) => setCourses(data.courses));
   }, []);
 
+  const course = courses.find((ele) => ele.id == courseId);
+
+  if (!course) {
+    return <div>Loading ....</div>;
+  }
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",
-      }}
-    >
-      {/* <Typography variant="h4">Courses</Typography> */}
-      {courses.map((course) => {
-        return <Course course={course} />;
-      })}
+    <div>
+      <CourseCard course={course} />
     </div>
   );
 }
 
-export function Course(props) {
+function CourseCard(props) {
+  const course = props.course;
   return (
     <Card style={{ width: 300, margin: 10, minHeight: 200 }}>
-      <CardMedia
-        style={{ height: 150 }}
-        image={props.course.imageLink}
-      ></CardMedia>
+      <CardMedia style={{ height: 150 }} image={course.imageLink}></CardMedia>
       <CardContent>
         <Typography variant="h5" textAlign={"center"}>
-          {props.course.title}
+          {course.title}
         </Typography>
         <Typography variant="h6" textAlign={"center"}>
-          {props.course.description}
+          {course.description}
         </Typography>
       </CardContent>
 
@@ -61,4 +58,4 @@ export function Course(props) {
   );
 }
 
-export default Courses;
+export default Course;

@@ -8,7 +8,6 @@ function Appbar() {
   const path = "http://localhost:3067";
 
   const [userEmail, setUserEmail] = useState(null);
-  const [isLoading, setIsLoading] = useState(null);
   useEffect(() => {
     fetch(`${path}/admin/me`, {
       method: "GET",
@@ -21,10 +20,6 @@ function Appbar() {
       .then((data) => setUserEmail(data.username));
   }, []);
 
-  // prevents
-  if (isLoading) {
-    return <div></div>;
-  }
   if (userEmail) {
     return (
       <div
