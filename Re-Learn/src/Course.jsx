@@ -4,13 +4,20 @@ import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import { CardActions, CardContent, CardMedia, Typography } from "@mui/material";
-
+import {
+  atom,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from "recoil";
 const path = "http://localhost:3067";
 
 function Course() {
   let { courseId } = useParams();
 
-  const [courses, setCourses] = useState([]);
+  //   const [courses, setCourses] = useState([]);
+
+  const setCourses = useSetRecoilState(coursesState);
 
   // get the list of courses
   useEffect(() => {
@@ -24,16 +31,18 @@ function Course() {
       .then((res) => res.json())
       .then((data) => setCourses(data.courses));
   }, []);
+  console.log("Hi there from courses");
 
-  const course = courses.find((ele) => ele.id == courseId);
+  //   const course = courses.find((ele) => ele.id == courseId);
 
-  if (!course) {
-    return <div>Loading ....</div>;
-  }
+  //   if (!course) {
+  //     return <div>Loading ....</div>;
+  //   }
+
   return (
     <div>
-      <CourseCard course={course} />
-      <UpdateCard courses={courses} course={course} setCourses={setCourses} />
+      <CourseCard courseId={courseId} />
+      <UpdateCard courseId={courseId} />
     </div>
   );
 }
@@ -43,7 +52,8 @@ function UpdateCard(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-
+  const [courses, setCourses] = useRecoilState(coursesState);
+  console.log("UpdateCard rendered");
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Card
@@ -78,7 +88,7 @@ function UpdateCard(props) {
           size="large"
           variant="contained"
           onClick={() => {
-            fetch(`${path}/admin/courses/` + course.id, {
+            fetch(`${path}/admin/courses/` + props.courseId, {
               method: "PUT",
               body: JSON.stringify({
                 title: title,
@@ -95,20 +105,20 @@ function UpdateCard(props) {
               .then((data) => {
                 // alert("Course updated successfully");
                 let updatedCourses = [];
-                for (let i = 0; i < props.courses.length; i++) {
-                  if (props.courses[i].id == course.id) {
+                for (let i = 0; i < courses.length; i++) {
+                  if (courses[i].id == props.courseId) {
                     updatedCourses.push({
-                      id: course.id,
+                      id: props.courseId,
                       title: title,
                       description: description,
                       imageLink: image,
                     });
                   } else {
-                    updatedCourses.push(props.courses[i]);
+                    updatedCourses.push(courses[i]);
                   }
                 }
 
-                props.setCourses(updatedCourses);
+                setCourses(updatedCourses);
               });
           }}
         >
@@ -120,7 +130,14 @@ function UpdateCard(props) {
 }
 
 function CourseCard(props) {
-  const course = props.course;
+  const courses = useRecoilValue(coursesState);
+  const course = courses.find((ele) => ele.id == props.courseId);
+
+  if (!course) {
+    return <div>Loading .....</div>;
+  }
+
+  console.log("Coursecard rendered");
   return (
     <div
       style={{
@@ -149,3 +166,8 @@ function CourseCard(props) {
 }
 
 export default Course;
+
+const coursesState = atom({
+  key: "coursesState",
+  default: [],
+});
