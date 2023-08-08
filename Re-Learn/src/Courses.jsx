@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
+import axios from "axios";
 import { CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 
 function Courses() {
@@ -10,15 +11,16 @@ function Courses() {
 
   // get the list of courses
   useEffect(() => {
-    fetch(`${path}/users/courses`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setCourses(data.courses));
+    async function getCourses() {
+      const response = await axios.get(`${path}/users/courses`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      setCourses(response.data.courses);
+    }
+
+    getCourses();
   }, []);
 
   return (
