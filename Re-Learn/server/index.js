@@ -24,10 +24,10 @@ app.use((req, res, next) => {
 
 app.use(express.json())
 app.use("/admin", adminRouter)
-app.use("/user", userRouter)
+app.use("/users", userRouter)
 
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://decryptlife:XwGPJC1QTVsXbVQX@cluster0.9auii05.mongodb.net/ReLearn?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, dbName: "ReLearn" });
 
 
-app.listen(3000, () => console.log("Server running on port 3000"))
+app.listen(3067, () => console.log("Server running on port 3067"))
