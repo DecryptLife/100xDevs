@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 
 function Courses() {
@@ -39,25 +40,29 @@ function Courses() {
   );
 }
 
-export function Course(props) {
+export function Course({ course }) {
+  const navigate = useNavigate();
   return (
     <Card style={{ width: 300, margin: 10, minHeight: 200 }}>
-      <CardMedia
-        style={{ height: 150 }}
-        image={props.course.imageLink}
-      ></CardMedia>
+      <CardMedia style={{ height: 150 }} image={course.imageLink}></CardMedia>
       <CardContent>
         <Typography variant="h5" textAlign={"center"}>
-          {props.course.title}
+          {course.title}
         </Typography>
         <Typography variant="h6" textAlign={"center"}>
-          {props.course.description}
+          {course.description}
         </Typography>
       </CardContent>
 
       <CardActions style={{ display: "flex", justifyContent: "center" }}>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button
+          size="small"
+          onClick={() => {
+            navigate("/course/" + course._id);
+          }}
+        >
+          EDIT
+        </Button>
       </CardActions>
     </Card>
   );
