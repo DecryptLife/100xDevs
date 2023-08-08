@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+
+const { User, Course, Admin } = require("./db")
 const cors = require('cors');
 
 const adminRouter = require("./routes/admin")
@@ -25,7 +27,7 @@ app.use("/admin", adminRouter)
 app.use("/user", userRouter)
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://bt22:Thombee2602@cluster0.9auii05.mongodb.net/courses', { useNewUrlParser: true, useUnifiedTopology: true, dbName: "courses" });
+mongoose.connect('mongodb+srv://decryptlife:XwGPJC1QTVsXbVQX@cluster0.9auii05.mongodb.net/ReLearn?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, dbName: "ReLearn" });
 
 
 app.listen(3000, () => console.log("Server running on port 3000"))
