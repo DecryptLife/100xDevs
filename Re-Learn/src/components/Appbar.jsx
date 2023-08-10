@@ -4,12 +4,18 @@ import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-function Appbar({ userEmail, setUserEmail }) {
-  // const history = useHistory();
-
-  const path = "http://localhost:3067";
-
+import { BASE_URL } from "../config";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { userState } from "../store/atoms/user";
+function Appbar({}) {
   const navigate = useNavigate();
+  const userLoading = useRecoilValue(userState);
+  const userEmail = useRecoilValue(userState);
+  const setUser = useSetRecoilState(userState);
+
+  if (userLoading) {
+    return <></>;
+  }
 
   if (userEmail) {
     return (
