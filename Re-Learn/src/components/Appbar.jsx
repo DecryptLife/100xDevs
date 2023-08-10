@@ -3,14 +3,14 @@ import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { BASE_URL } from "../config";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { userState } from "../store/atoms/user";
+import { isUserLoading } from "../store/selectors/isUserLoading";
+import { userEmailState } from "../store/selectors/userEmail";
 function Appbar({}) {
   const navigate = useNavigate();
-  const userLoading = useRecoilValue(userState);
-  const userEmail = useRecoilValue(userState);
+  const userLoading = useRecoilValue(isUserLoading);
+  const userEmail = useRecoilValue(userEmailState);
   const setUser = useSetRecoilState(userState);
 
   if (userLoading) {
@@ -58,44 +58,44 @@ function Appbar({}) {
         </div>
       </div>
     );
-  }
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        padding: 10,
-      }}
-    >
-      <div>
-        <Typography variant="h6">Re-Learn</Typography>
-      </div>
-      <div style={{ display: "flex" }}>
-        <div style={{ marginRight: 10 }}>
-          <Button
-            variant="contained"
-            onClick={() => {
-              navigate("/signup");
-            }}
-          >
-            Sign up
-          </Button>
-        </div>
+  } else {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: 10,
+        }}
+      >
         <div>
-          <Button
-            variant="contained"
-            onClick={() => {
-              // history.push("/login");
-              navigate("/login");
-            }}
-          >
-            Sign in
-          </Button>
+          <Typography variant="h6">Re-Learn</Typography>
+        </div>
+        <div style={{ display: "flex" }}>
+          <div style={{ marginRight: 10 }}>
+            <Button
+              variant="contained"
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
+              Sign up
+            </Button>
+          </div>
+          <div>
+            <Button
+              variant="contained"
+              onClick={() => {
+                // history.push("/login");
+                navigate("/login");
+              }}
+            >
+              Sign in
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Appbar;

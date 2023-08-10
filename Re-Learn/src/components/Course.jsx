@@ -3,10 +3,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Typography, TextField, Button } from "@mui/material";
 import axios from "axios";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { courseState } from "../store/atoms/course";
 
 function Course() {
   let { courseId } = useParams();
-  const [course, setCourse] = useState(null);
+
+  const setCourse = useSetRecoilState(courseState);
+  const courseLoading = useRecoilValue();
 
   useEffect(() => {
     axios
@@ -17,7 +21,10 @@ function Course() {
         },
       })
       .then((res) => {
-        setCourse(res.data.course);
+        setCourse({ isLoading: false, course: res.data.course });
+      })
+      .catch((e) => {
+        setCourse({ isLoading: false, course: null });
       });
   }, []);
 
@@ -40,10 +47,10 @@ function Course() {
       <GrayTopper title={course.title} />
       <Grid container>
         <Grid item lg={8} md={12} sm={12}>
-          <UpdateCard course={course} setCourse={setCourse} />
+          <UpdateCard />
         </Grid>
         <Grid item lg={4} md={12} sm={12}>
-          <CourseCard course={course} />
+          <CourseCard />
         </Grid>
       </Grid>
     </div>
