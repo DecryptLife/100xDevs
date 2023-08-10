@@ -5,12 +5,15 @@ import { Typography } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../config";
+import { useSetRecoilState } from "recoil";
+import { userState } from "../store/atoms/user";
 
-function SignUp({ setUserEmail }) {
+function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const path = "http://localhost:3067";
+  const setUser = useSetRecoilState(userState);
   return (
     <div>
       <div
@@ -47,30 +50,15 @@ function SignUp({ setUserEmail }) {
               size="large"
               variant="contained"
               onClick={async () => {
-                const response = await axios.post(`${path}/admin/signup`, {
+                const response = await axios.post(`${BASE_URL}/admin/signup`, {
                   username: email,
                   password: password,
                 });
-
+                console.log("check");
                 let data = response.data;
                 localStorage.setItem("token", data.token);
-                setUserEmail(email);
+                setUser({ userEmail: email, isLoading: false });
                 navigate("/");
-                // fetch(`${path}/admin/signup`, {
-                //   method: "POST",
-                //   body: JSON.stringify({
-                //     username: email,
-                //     password: password,
-                //   }),
-                //   headers: {
-                //     "Content-type": "application/json",
-                //   },
-                // })
-                //   .then((res) => res.json())
-                //   .then((data) => {
-                //     localStorage.setItem("token", data.token);
-                //     window.location = "/";
-                //   });
               }}
             >
               Sign up
