@@ -36,7 +36,9 @@ function Landing() {
             </div>
           </div>
         </Grid>
-        <Grid item xs={12} md={6} lg={6}></Grid>
+        <Grid item xs={12} md={6} lg={6}>
+          <img src={"/class.webp"} width={"100%"} />
+        </Grid>
       </Grid>
     </div>
   );

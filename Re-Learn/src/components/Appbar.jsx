@@ -4,27 +4,12 @@ import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-function Appbar() {
+function Appbar({ userEmail, setUserEmail }) {
   // const history = useHistory();
 
   const path = "http://localhost:3067";
 
   const navigate = useNavigate();
-  const [userEmail, setUserEmail] = useState(null);
-
-  const init = async () => {
-    const response = await axios.get(`${path}/admin/me`, {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
-
-    if (response.data.username) setUserEmail(response.data.username);
-  };
-
-  useEffect(() => {
-    init();
-  }, []);
 
   if (userEmail) {
     return (
@@ -57,8 +42,8 @@ function Appbar() {
           <Button
             variant="contained"
             onClick={() => {
-              // history.push("/singup");
               localStorage.setItem("token", null);
+              setUserEmail(null);
               navigate("/signup");
             }}
           >

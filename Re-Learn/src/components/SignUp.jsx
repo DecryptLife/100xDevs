@@ -4,10 +4,12 @@ import Card from "@mui/material/Card";
 import { Typography } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function SignUp() {
+function SignUp({ setUserEmail }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const path = "http://localhost:3067";
   return (
     <div>
@@ -52,7 +54,8 @@ function SignUp() {
 
                 let data = response.data;
                 localStorage.setItem("token", data.token);
-                window.location = "/";
+                setUserEmail(email);
+                navigate("/");
                 // fetch(`${path}/admin/signup`, {
                 //   method: "POST",
                 //   body: JSON.stringify({
