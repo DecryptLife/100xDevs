@@ -2,22 +2,28 @@
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 function Appbar() {
   // const history = useHistory();
 
   const path = "http://localhost:3067";
 
+  const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState(null);
-  useEffect(() => {
-    fetch(`${path}/admin/me`, {
-      method: "GET",
+
+  const init = async () => {
+    const response = await axios.get(`${path}/admin/me`, {
       headers: {
-        "Content-type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
-    })
-      .then((res) => res.json())
-      .then((data) => setUserEmail(data.username));
+    });
+
+    if (response.data.username) setUserEmail(response.data.username);
+  };
+
+  useEffect(() => {
+    init();
   }, []);
 
   if (userEmail) {
@@ -27,25 +33,37 @@ function Appbar() {
           display: "flex",
           justifyContent: "space-between",
           padding: 10,
+          zIndex: 1,
         }}
       >
         <div>
           <Typography variant="h6">Re-Learn</Typography>
         </div>
         <div style={{ display: "flex" }}>
-          <div>{userEmail}</div>
-          <div style={{ marginRight: 10 }}>
-            <Button
-              variant="contained"
-              onClick={() => {
-                // history.push("/singup");
-                localStorage.setItem("token", null);
-                window.location = "/signup";
-              }}
-            >
-              Logout
-            </Button>
-          </div>
+          <Button
+            onClick={() => {
+              navigate("/addcourse");
+            }}
+          >
+            Add Course
+          </Button>
+          <Button
+            onClick={() => {
+              navigate("/courses");
+            }}
+          >
+            Courses
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              // history.push("/singup");
+              localStorage.setItem("token", null);
+              navigate("/signup");
+            }}
+          >
+            Logout
+          </Button>
         </div>
       </div>
     );
@@ -67,8 +85,7 @@ function Appbar() {
           <Button
             variant="contained"
             onClick={() => {
-              // history.push("/singup");
-              window.location = "/signup";
+              navigate("/signup");
             }}
           >
             Sign up
@@ -79,7 +96,7 @@ function Appbar() {
             variant="contained"
             onClick={() => {
               // history.push("/login");
-              window.location = "/login";
+              navigate("/login");
             }}
           >
             Sign in

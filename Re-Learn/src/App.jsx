@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SignUp from "./SignUp.jsx";
-import Appbar from "./Appbar.jsx";
-import Signin from "./Signin.jsx";
-import Addcourse from "./Addcourse.jsx";
-import Courses from "./Courses.jsx";
-import Course from "./Course.jsx";
+import SignUp from "./components/SignUp";
+import Appbar from "./components/Appbar";
+import Signin from "./components/Signin.jsx";
+import Addcourse from "./components/Addcourse.jsx";
+import Courses from "./components/Courses.jsx";
+import Course from "./components/Course.jsx";
 import {
   RecoilRoot,
   atom,
@@ -12,6 +12,7 @@ import {
   useRecoilState,
   useRecoilValue,
 } from "recoil";
+import Landing from "./components/Landing.jsx";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/courses" element={<Courses />}></Route>
             <Route path="/login" element={<Signin />}></Route>
             <Route path="/signup" element={<SignUp />}></Route>
+            <Route path="/" element={<Landing />}></Route>
           </Routes>
         </Router>
       </RecoilRoot>
