@@ -154,7 +154,7 @@ function UpdateCard() {
             variant="contained"
             onClick={async () => {
               axios.put(
-                `${BASE_URL}/admin/courses/` + courseDetails._id,
+                `${BASE_URL}/admin/courses/` + courseDetails.course._id,
                 {
                   title: title,
                   description: description,
