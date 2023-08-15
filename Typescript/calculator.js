@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.calculator = void 0;
 function calculator(first, second, opeartion) {
     var ans = 0;
     switch (opeartion) {
@@ -19,6 +22,7 @@ function calculator(first, second, opeartion) {
     }
     return ans;
 }
+exports.calculator = calculator;
 var output = calculator(10, 5, "div");
 if (output != 0)
     console.log(output);

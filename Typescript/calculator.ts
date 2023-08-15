@@ -1,4 +1,8 @@
-function calculator(first: number, second: number, opeartion: string): number {
+export function calculator(
+  first: number,
+  second: number,
+  opeartion: string
+): number {
   var ans = 0;
   switch (opeartion) {
     case "add":
