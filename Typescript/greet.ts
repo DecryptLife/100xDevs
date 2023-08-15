@@ -1,4 +1,9 @@
-function greet(person: { name: string; age: number }): string {
+interface Person {
+  name: string;
+  age: number;
+}
+
+function greet(person: Person): string {
   return (
     "Hello Mr." +
     person.name +
