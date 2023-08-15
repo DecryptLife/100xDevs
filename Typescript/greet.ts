@@ -1,29 +1,14 @@
-interface Circle {
-  radius: number;
+enum Arithmetic {
+  Add,
+  Sub,
+  Mul,
+  Div,
 }
 
-interface Square {
-  side: number;
+function calc(a: number, b: number, type: Arithmetic) {
+  //body
 }
 
-interface Rectangle {
-  width: number;
-  height: number;
-}
+let x = calc(1, 2, Arithmetic.Add);
 
-type Shape = Circle | Square | Rectangle;
-
-function renderShape(shape: Shape) {
-  console.log("rendered");
-}
-
-function calculateArea(shape: Shape) {
-  console.log("calculated area");
-}
-
-renderShape({
-  radius: 10,
-  width: 10,
-  height: 10,
-  side: 10,
-});
+console.log(x);
