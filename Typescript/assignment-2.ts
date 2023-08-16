@@ -1,10 +1,9 @@
-function swap<T>(a: T, b: T) {
-  console.log(`Before swapping a = ${a} b = ${b}`);
-  let temp = a;
-  a = b;
-  b = temp;
-  console.log(`Before swapping a = ${a} b = ${b}`);
+function swap<T, U>(a: T, b: U) {
+  return [b, a];
 }
 
-swap<number>(12, 15);
-swap<string>("Benson", "Thomas");
+const anst = swap("Benson", 1);
+const ans1 = swap(1, 10);
+
+console.log(anst);
+console.log(ans1);

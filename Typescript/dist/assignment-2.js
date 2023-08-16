@@ -1,10 +1,8 @@
 "use strict";
 function swap(a, b) {
-    console.log(`Before swapping a = ${a} b = ${b}`);
-    let temp = a;
-    a = b;
-    b = temp;
-    console.log(`Before swapping a = ${a} b = ${b}`);
+    return [b, a];
 }
-swap(12, 15);
-swap("Benson", "Thomas");
+const anst = swap("Benson", 1);
+const ans1 = swap(1, 10);
+console.log(anst);
+console.log(ans1);
