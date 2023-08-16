@@ -1,8 +1,18 @@
 "use strict";
 function firstEle(arr) {
-    if (arr.length > 0)
-        return arr[0];
+    return arr[0];
 }
-const a = firstEle([12, 32, 34, 56, 68]);
-const b = firstEle(["Benson", "Thomas", "Beena"]);
-console.log(b);
+let a = firstEle([12, 32, 34, 56, 68]);
+let b = firstEle(["Benson", "Thomas", "Beena"]);
+let c = firstEle([
+    {
+        name: "Benson",
+        age: 24,
+    },
+    {
+        name: "Ameya",
+        age: 25,
+    },
+]);
+b = b.toLowerCase();
+console.log(c);

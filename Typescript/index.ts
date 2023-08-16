@@ -1,9 +1,22 @@
-type numArray = number[] | string[];
-
-function firstEle(arr: numArray) {
-  if (arr.length > 0) return arr[0];
+type User = {
+  name: string;
+  age: number;
+};
+function firstEle<T>(arr: T[]) {
+  return arr[0];
 }
 
-const a = firstEle([12, 32, 34, 56, 68]);
-const b = firstEle(["Benson", "Thomas", "Beena"]);
-console.log(b);
+let a = firstEle<number>([12, 32, 34, 56, 68]);
+let b = firstEle<string>(["Benson", "Thomas", "Beena"]);
+let c = firstEle<User>([
+  {
+    name: "Benson",
+    age: 24,
+  },
+  {
+    name: "Ameya",
+    age: 25,
+  },
+]);
+b = b.toLowerCase();
+console.log(c);
