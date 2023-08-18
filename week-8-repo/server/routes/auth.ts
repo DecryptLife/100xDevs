@@ -3,11 +3,8 @@ import express from "express";
 import { authenticateJwt, SECRET } from "../middleware/";
 import { User } from "../db";
 import { z } from "zod";
+import { SignUpInput, SignUpParams } from "@decryptlife/common";
 
-const SignUpInput = z.object({
-  username: z.string().min(1).max(10),
-  password: z.string().min(6).max(10),
-});
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
