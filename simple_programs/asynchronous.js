@@ -33,3 +33,6 @@ function printTime() {
 }
 
 const clock = setInterval(printTime, 1 * 1000);
+
+
+// stopped at 45 mins

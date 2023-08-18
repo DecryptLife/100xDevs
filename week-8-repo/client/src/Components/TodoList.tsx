@@ -1,10 +1,23 @@
 import { useState, useEffect } from "react";
 import { authState } from "../store/authState.js";
 import { useRecoilValue } from "recoil";
+import { useNavigate } from "react-router-dom";
 
-function useTodos() {
-  const [todos, setTodos] = useState([]);
-  const [loading, setLoading] = useState(true);
+interface Todo {
+  _id: string;
+  title: string;
+  description: string;
+  done: boolean;
+}
+
+type TodoArray = Todo[];
+
+const TodoList = () => {
+  const [todos, setTodos] = useState<TodoArray>([]);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const authStateValue = useRecoilValue(authState);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getTodos = async () => {
@@ -12,24 +25,11 @@ function useTodos() {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       // Todo: Create a type for the response that you get back from the server
-      const data = await response.json();
+      const data: Todo[] = await response.json();
       setTodos(data);
-      setLoading(false);
     };
     getTodos();
   }, []);
-  return {
-    loading,
-    todos,
-    setTodos,
-  };
-}
-
-const TodoList = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const authStateValue = useRecoilValue(authState);
-  const { loading, todos, setTodos } = useTodos();
 
   const addTodo = async () => {
     const response = await fetch("http://localhost:3000/todo/todos", {
@@ -73,7 +73,7 @@ const TodoList = () => {
           <button
             onClick={() => {
               localStorage.removeItem("token");
-              window.location = "/login";
+              navigate("/login");
             }}
           >
             Logout

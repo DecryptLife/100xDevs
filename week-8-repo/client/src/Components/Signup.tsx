@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import { authState } from "../store/authState.js";
+import { SignUpParams } from "@decryptlife/common";
 
 const Signup = () => {
   const [username, setUsername] = useState("");

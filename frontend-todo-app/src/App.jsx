@@ -10,6 +10,16 @@ function useTodos() {
         setTodos(data);
       });
     });
+
+    setInterval(() => {
+      fetch("http://localhost:3000/todos", { method: "GET" }).then(
+        (response) => {
+          response.json().then((data) => {
+            setTodos(data);
+          });
+        }
+      );
+    }, 1000);
   }, []);
 
   return todos;
