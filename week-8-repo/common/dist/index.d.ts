@@ -1,5 +1,5 @@
 import { z } from "zod";
-declare const SignUpInput: z.ZodObject<{
+export declare const SignUpInput: z.ZodObject<{
     username: z.ZodString;
     password: z.ZodString;
 }, "strip", z.ZodTypeAny, {
@@ -10,4 +10,3 @@ declare const SignUpInput: z.ZodObject<{
     password: string;
 }>;
 export type SignUpParams = z.infer<typeof SignUpInput>;
-export {};
