@@ -13,8 +13,7 @@ app.use("/admin", adminRouter)
 app.use("/user", userRouter)
 
 
+
 // Connect to MongoDB
 // DONT MISUSE THIS THANKYOU!!
-mongoose.connect("mongodb+srv://decryptlife:XwGPJC1QTVsXbVQX@cluster0.9auii05.mongodb.net/ReLearn?retryWrites=true&w=majority",
-    { dbName: "ReLearn" });
-app.listen(3001, () => console.log('Server running on port 3000'));
+app.listen(3000, () => console.log('Server running on port 3000'));
