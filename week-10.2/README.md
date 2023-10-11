@@ -36,3 +36,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## getServerSideProps() in ssr.tsx files inside pages
+
+It is important to have the function getServerSideProps() in the ssr files of pages. This is an asynchronous function. When this particular page is hit the control directly goes to this function and waits for the response from the request. Once the reqest is obtained we send it as props to the default function for the initial rendering
