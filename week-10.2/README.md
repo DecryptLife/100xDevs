@@ -37,6 +37,16 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+# NextJS
+
+## What is NextJS ?
+
+NextJS allows pre-hydrating the html code. This enables SEO - Search Engine optimization. When search engines like Google tries to scrape through website if it hits a certain endpoint the page generally returns an empty <script> tag which does not convey anything about the website.
+
+## Migrating to NextJS
+
+In React we had App.js with all the routes which helps us navigate. In NextJS instead of routes we have a pages directory and the file name acts like routes
+
 ## getServerSideProps() in ssr.tsx files inside pages
 
 It is important to have the function getServerSideProps() in the ssr files of pages. This is an asynchronous function. When this particular page is hit the control directly goes to this function and waits for the response from the request. Once the reqest is obtained we send it as props to the default function for the initial rendering
