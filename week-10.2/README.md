@@ -52,3 +52,5 @@ In React we had App.js with all the routes which helps us navigate. In NextJS in
 It is important to have the function getServerSideProps() in the ssr files of pages. This is an asynchronous function. When this particular page is hit the control directly goes to this function and waits for the response from the request. Once the reqest is obtained we send it as props to the default function for the initial rendering
 
 ### Next - 13 aritce - https://nextjs.org/blog/next-13
+
+For dynamic values such as courses/1 create a directory called courses with filename as [courseId].tsx and inside use a hook that gives the params id
